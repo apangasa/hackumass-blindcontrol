@@ -10,8 +10,10 @@ def send_instructions(schedule):
         for scheduled_time in schedule.keys():
             if int(time.strftime('%H')) == int(scheduled_time.split(':')[0]) and int(time.strftime('%M')) == int(scheduled_time.split(':')[1]):
                 new_state = schedule[scheduled_time]
+                print('Posting... ' + str(new_state))
                 requests.post(
                     'https://blind-control-299118.ue.r.appspot.com/flip', json={'new_state': new_state})
+                print('Posted.')
 
         manual = True if requests.get('https://blind-control-299118.ue.r.appspot.com/get-mode').json()[
             'mode'] == 'manual' else False
