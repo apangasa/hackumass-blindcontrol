@@ -8,7 +8,7 @@ def scheduler(schedule):
     manual = False
     while not manual:
         for scheduled_time in schedule.keys():
-            if int(time.strftime('%H')) == int(scheduled_time.split(':')[0]):
+            if int(time.strftime('%H')) == int(scheduled_time.split(':')[0]) and int(time.strftime('%M')) == int(scheduled_time.split(':')[1]):
                 new_state = schedule[scheduled_time]
                 requests.post('FLIP STATE', json={'new_state': new_state})
 
