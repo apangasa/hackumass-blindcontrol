@@ -6,7 +6,9 @@ import requests
 app = Flask(__name__)
 CORS(app)
 
-WORKDIR = ''
+WORKDIR = ''  # The directory of the local filesystem where workfiles should be read from and written to
+
+# A way to quickly check if the endpoint has deployed properly
 
 
 @app.route('/', methods=['GET'])
@@ -14,6 +16,9 @@ def helloWorld():
     return 'Local Endpoint is up and running!', 200
 
 
+# This Flask app will receive a post request from the cloud endpoint
+# Occurs after the user specifies to change the mode
+# This will be written to the local filesystem to be read by the local script
 @app.route('/write-mode', methods=['POST'])
 def writeMode():
     mode = request.json.get('mode', None)
