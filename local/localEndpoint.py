@@ -8,9 +8,8 @@ CORS(app)
 
 WORKDIR = ''  # The directory of the local filesystem where workfiles should be read from and written to
 
+
 # A way to quickly check if the endpoint has deployed properly
-
-
 @app.route('/', methods=['GET'])
 def helloWorld():
     return 'Local Endpoint is up and running!', 200
@@ -27,6 +26,22 @@ def writeMode():
 
     with open(WORKDIR + '/mode.data', 'w') as mode_file:
         mode_file.write(mode)
+
+    return jsonify(success=True), 200
+
+
+# This is triggered when the blinds need to be in a specific state
+# This may occur due to a scheduled post request that the client set up
+# It may also occur due to a direct request by the client
+# The new state is written to the instruction queue to be read by the local script
+@app.route('/flip', methods=['POST'])
+def openClose():
+    new_state = request.json.get('new_state', None)
+    if not new_state:
+        return 'No state specified', 400
+
+    with open(WORKDIR + '/instructions.data', 'a') as instructions:
+        instructions.write(new_state)
 
     return jsonify(success=True), 200
 
