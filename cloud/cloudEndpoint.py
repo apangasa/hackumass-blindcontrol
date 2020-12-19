@@ -8,6 +8,9 @@ app = Flask(__name__)
 # allow cross-origin resource sharing
 CORS(app)
 
+# requests will be routed to this endpoint when it is time for an instruction to be executed
+LOCAL_ENDPOINT_URL = ''
+
 # A way to quickly check if the endpoint has deployed properly
 
 
@@ -24,8 +27,19 @@ def changeMode():
     mode = request.json.get('mode', None)
     if not mode:
         return 'No mode specified', 400
-    local_endpoint_url = ''
-    requests.post(local_endpoint_url + '/write-mode', json={'mode': mode})
+    requests.post(LOCAL_ENDPOINT_URL + '/write-mode', json={'mode': mode})
+    return jsonify(success=True), 200
+
+
+# Flask app receives request to open or close the blinds
+# This will happen only if mode is set to manual
+# Otherwise, it will throw an error and continue in auto
+@app.route('/flip', methods=['POST'])
+def openClose():
+    new_state = request.json.get('new_state', None)
+    if not new_state:
+        return 'No new state specified', 400
+    requests.post(LOCAL_ENDPOINT_URL + '/flip', json={'new_state': new_state})
     return jsonify(success=True), 200
 
 
