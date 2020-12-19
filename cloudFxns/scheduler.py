@@ -15,8 +15,8 @@ def send_instructions(schedule):
                     'https://blind-control-299118.ue.r.appspot.com/flip', json={'new_state': new_state})
                 print('Posted.')
 
-        manual = True if requests.get('https://blind-control-299118.ue.r.appspot.com/get-mode').json()[
-            'mode'] == 'manual' else False
+        manual = requests.get(
+            'https://blind-control-299118.ue.r.appspot.com/get-mode').json()['mode'] == 'manual'
         schedule = requests.get(
             'https://blind-control-299118.ue.r.appspot.com/get-schedule').json()
     return
