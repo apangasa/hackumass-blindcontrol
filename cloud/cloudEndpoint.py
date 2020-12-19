@@ -27,6 +27,11 @@ def changeMode():
     mode = request.json.get('mode', None)
     if not mode:
         return 'No mode specified', 400
+
+    # TO BE WRITTEN:
+    # if mode is automatic:
+    #     clear cloud task schedule
+
     requests.post(LOCAL_ENDPOINT_URL + '/write-mode', json={'mode': mode})
     return jsonify(success=True), 200
 
@@ -40,6 +45,15 @@ def openClose():
     if not new_state:
         return 'No new state specified', 400
     requests.post(LOCAL_ENDPOINT_URL + '/flip', json={'new_state': new_state})
+    return jsonify(success=True), 200
+
+
+@app.route('/set-schedule', methods=['POST'])
+def setSchedule():
+    schedule = request.json
+
+    # DYNAMICALLY SCHEDULE GCP CLOUD TASKS TO FIRE FLIP WITH NECESSARY STATE AUTOMATICALLY
+
     return jsonify(success=True), 200
 
 
