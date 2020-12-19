@@ -1,3 +1,5 @@
 
 resources/blind-control-299118-75e2f6c51106.json
 cloud/__pycache__/cloudEndpoint.cpython-38.pyc
+test/
+cloudFunctions/
