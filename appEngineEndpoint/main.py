@@ -19,9 +19,24 @@ def helloWorld():
     return 'Blind Control Endpoint is up and running!', 200
 
 
+@app.route('/get-mode', methods=['GET'])
+def getMode():
+    with open('./mode.data', 'r') as mode_file:
+        mode = mode_file.read()
+        return jsonify(mode=mode), 200
+
+
+@app.route('/get-schedule', methods=['GET'])
+def getSchedule():
+    with open('./schedule.json', 'r') as schedule_file:
+        schedule = json.load(schedule_file)
+        return jsonify(schedule), 200
+
 # Flask app will get a request from the frontend client application
 # Occurs when user presses button to change mode from manual to auto / vice versa
 # This endpoint will simply route this change directly to the local endpoint
+
+
 @app.route('/change-mode', methods=['POST'])
 def changeMode():
     mode = request.json.get('mode', None)
@@ -46,6 +61,13 @@ def changeMode():
 # Otherwise, it will throw an error and continue in auto
 @app.route('/flip', methods=['POST'])
 def openClose():
+    mode = None
+    with open('./mode.data', 'r') as mode_file:
+        mode = mode_file.read()
+
+    if mode == 'automatic':
+        return 'Switch to manual!', 400
+
     new_state = request.json.get('new_state', None)
     if not new_state:
         return 'No new state specified', 400
@@ -56,6 +78,9 @@ def openClose():
 @app.route('/set-schedule', methods=['POST'])
 def setSchedule():
     schedule = request.json
+
+    with open('./schedule.json', 'w') as schedule_file:
+        json.dump(schedule, schedule_file)
 
     return jsonify(success=True), 200
 
