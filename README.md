@@ -8,9 +8,11 @@ Flippy consists of extensive hardware and software that allows it to control you
 On the hardware end, Flippy makes use of an Arduino Uno to operate a stepper motor according to resistances measured from a photoresistor. We empirically determined a threshold resistance that indicates daylight, so the motor opens and closes the blinds based on the measured photoresistor value compared to this threshold. In order to create an interface between the stepper motor and blinds, we created a gear system using CAD and a 3D printer. We measured out the size of the blinds and the location of the spinning rod using a digital caliper, then custom-engineered a 3D printed mount that allowed us to attach the motor to the top of the blinds. This gave us a very solid frame that could handle the stresses of opening and closing the blinds.
 
 ![Schematic](https://github.com/apangasa/hackumass-blindcontrol/blob/main/images/Schematic.png)
+![Breadboard](https://github.com/apangasa/hackumass-blindcontrol/blob/main/images/Breadboard.jpg)
 ![Bracket CAD 1](https://github.com/apangasa/hackumass-blindcontrol/blob/main/images/Bracket1.png)
 ![Bracket CAD 2](https://github.com/apangasa/hackumass-blindcontrol/blob/main/images/Bracket2.png)
 ![Gears](https://github.com/apangasa/hackumass-blindcontrol/blob/main/images/Gears.png)
+![3DPrint](https://github.com/apangasa/hackumass-blindcontrol/blob/main/images/3DPrint.jpg)
 
 
 ### Software 💻
@@ -37,3 +39,5 @@ Flippy has a multitude of use cases:
 
 ## What's next for Flippy 🔮
 The first development that we want to make is using a Wi-Fi module to connect the Arduino to the internet instead of connecting it to a computer with a local server via USB. Although our method worked for communicating between the cloud and the Arduino, the process flow would be a lot cleaner and more scalable with a Wi-Fi module, so if we had access to one, we would definitely use that instead. Additionally, we want to provide the user with more customizability and flexibility on the application end. For example, we would perhaps want to allow the user to set their custom threshold of daylight they want to let in, rather than using our empirically determined threshold value. Moreover, we could even increase the precision of the motor turning to allow in specific amounts of light. Another cool integration would be IOT expansion via Google Assistant or Amazon Alexa. Finally, we want to finish the full functionality of allowing the user to set a schedule of times to open and close by invoking our already written Google Cloud Function for doing so.
+
+![Flippy](https://github.com/apangasa/hackumass-blindcontrol/blob/main/images/FlippyOfficial.jpg)
