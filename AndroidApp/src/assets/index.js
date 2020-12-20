@@ -5,7 +5,7 @@ function blindStateChange() {
     //setup gcp headers and body to change close blinds
     let myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
-    let raw = JSON.stringify({"new_state":"close"});
+    let raw = JSON.stringify({"new_state":"closed"});
     let requestOptions = {
       method: 'POST',
       headers: myHeaders,

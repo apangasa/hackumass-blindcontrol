@@ -15,6 +15,7 @@ Flippy's software consists of the following:
 - Python Flask application running locally to allow the Arduino to communicate with the cloud server
 - Python code running locally to interface between the Uno and the cloud server application
 
+![Flippy Mobile](https://github.com/apangasa/hackumass-blindcontrol/Flippy.jpg)
 
 ## Use Case
 Flippy has a multitude of use cases:

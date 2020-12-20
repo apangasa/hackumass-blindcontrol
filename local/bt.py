@@ -6,9 +6,9 @@ def main():
     while True:
         instr = None
         mode = None
-        with open('./instructions.data') as instructions:
+        with open('./instructions.data', 'r') as instructions:
             instr = instructions.read()
-        with open('./mode.data') as modes:
+        with open('./mode.data', 'r') as modes:
             mode = modes.read()
         state = arduino.read(1)
         print(state)
@@ -17,7 +17,7 @@ def main():
         if mode == '1':
             arduino.write(bytes('2', 'ascii'))
         else:
-            arduino.write(bytes(instr, 'ascii'))
+            arduino.write(bytes(instr[-1], 'ascii'))
 
 def sendToCloud(state):
     if not state:
