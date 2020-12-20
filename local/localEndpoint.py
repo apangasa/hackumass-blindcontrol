@@ -6,7 +6,7 @@ import requests
 app = Flask(__name__)
 CORS(app)
 
-WORKDIR = ''  # The directory of the local filesystem where workfiles should be read from and written to
+WORKDIR = 'C:\Users\ramse\Documents\hackumass-blindcontrol\local'  # The directory of the local filesystem where workfiles should be read from and written to
 
 
 # A way to quickly check if the endpoint has deployed properly
