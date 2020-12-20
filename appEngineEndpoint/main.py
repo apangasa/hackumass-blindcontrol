@@ -9,7 +9,7 @@ app = Flask(__name__)
 CORS(app)
 
 # requests will be routed to this endpoint when it is time for an instruction to be executed
-LOCAL_ENDPOINT_URL = 'http://393dca1f8152.ngrok.io'
+LOCAL_ENDPOINT_URL = 'http://d45265a26389.ngrok.io'
 
 MODE = 'automatic'
 STATE = 'open'
