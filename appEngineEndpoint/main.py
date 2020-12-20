@@ -32,6 +32,23 @@ def getSchedule():
         schedule = json.load(schedule_file)
         return jsonify(schedule), 200
 
+
+@app.route('/receive-state', methods=['POST'])
+def receiveState():
+    state = request.json.get('state', None)
+    if not state:
+        return 'No state provided', 400
+    with open('./state.data', 'w') as state_file:
+        state_file.write(state)
+    return jsonify(success=True), 200
+
+
+@app.route('/get-state', methods=['GET'])
+def getState():
+    with open('./state.data', 'r') as state_file:
+        state = state_file.read()
+        return jsonify(state=state), 200
+
 # Flask app will get a request from the frontend client application
 # Occurs when user presses button to change mode from manual to auto / vice versa
 # This endpoint will simply route this change directly to the local endpoint
@@ -71,7 +88,7 @@ def openClose():
     new_state = request.json.get('new_state', None)
     if not new_state:
         return 'No new state specified', 400
-    requests.post(LOCAL_ENDPOINT_URL + '/flip', json={'new_state': new_state})
+    # requests.post(LOCAL_ENDPOINT_URL + '/flip', json={'new_state': new_state})
     return jsonify(success=True), 200
 
 
