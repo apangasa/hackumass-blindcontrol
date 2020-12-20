@@ -142,7 +142,7 @@ async function getWindowState() {
     blindState.innerHTML = 'open';
     blindImage.innerHTML='Blinds are Open';
   }
-  else if (result.state=='close') {
+  else if (result.state=='closed') {
     blindState.innerHTML = 'close';
     blindImage.innerHTML = 'Blinds are Closed';
   }
