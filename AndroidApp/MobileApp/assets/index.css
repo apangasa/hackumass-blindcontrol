@@ -1,0 +1,61 @@
+body {
+  width: 100%;
+  border: none;
+  background-color: white;
+  text-align: center;
+  font-size: 20px;
+  margin: 0;
+}
+p {
+  font-size: 25px;
+  margin-top: 0;
+  color: white;
+  font-weight: bold;
+  letter-spacing: .1em;
+  font-family: 'Roboto';
+}
+button {
+  height: 100px;
+  width: 80%;
+  outline:none;
+}
+.title {
+  padding-top: 50px;
+  padding-bottom: 10px;
+  background-color: #add8e6;
+  color: white;
+  width: 100%;
+  letter-spacing: .2em;
+  text-indent: .2em;
+  font-size: 50px;
+  font-weight: bold;
+  font-family: 'Roboto';
+}
+#windowState {
+  background-image: linear-gradient(to bottom, #add8e6 75%, #ffffff 75%);
+}
+#windowState button {
+  font-size: 25px;
+  font-family: 'Roboto';
+  background-color: white;
+  border-radius: 20px;
+
+
+}
+#options button {
+  width: 100%;
+  font-size: 25px;
+  font-weight: bold;
+  letter-spacing: .1em;
+  font-family: 'Roboto';
+  background-color: #add8e6;
+  color:white;
+  border: none;
+
+
+}
+#options {
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+}
