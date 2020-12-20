@@ -1,0 +1,96 @@
+<html>
+<head>
+    <script src = "../assets/androidjs.js"></script>
+    <link rel="stylesheet" href="../assets/index.css">
+    <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
+
+</head>
+<body>
+  <div class="title"> Blind Me</div>
+    <div id="windowState"></div>
+    <div id="windowTime"></div>
+    <div id="options"> </div>
+</body>
+<script>
+    function blindStateChange() {
+      console.log(blindState);
+      if (blindState.innerHTML=="open") {
+        //gcp request to change to closed
+        //if retun successful change blindState
+        blindState.innerHTML='close';
+        document.getElementById('blindsAdjust').innerHTML = blindState.innerHTML;
+        document.getElementById('blindsCurrent').innerHTML = 'Blinds are Open';
+
+      }
+      else if (blindState.innerHTML=="close") {
+        //gcp request to change to open
+        //if retun successful change blindState
+        blindState.innerHTML="open";
+        document.getElementById('blindsAdjust').innerHTML = blindState.innerHTML;
+        document.getElementById('blindsCurrent').innerHTML = 'Blinds are Closed';
+
+      }
+    }
+
+    function changeMode() {
+        if (blindsMode == "manual") {
+          blindsMode="automatic";
+          let windowState = document.getElementById('options');
+          windowState.innerHTML = '';
+          let modeSwitch = document.getElementById('modeSwitch');
+          modeSwitch.innerHTML = "switch to manual";
+        }
+        else if (blindsMode == "automatic") {
+          let modeSwitch = document.getElementById('modeSwitch');
+          modeSwitch.innerHTML = "switch to magic mode";
+          blindsMode = "manual";
+          let items = document.getElementById('options');
+          let blindsAdjust = document.createElement("button");
+          blindsAdjust.id = "blindsAdjust";
+          blindsAdjust.innerHTML = blindState.innerHTML;
+          items.appendChild(blindsAdjust);
+          alert(blindsAdjust.innerHTML)
+          blindsAdjust.onclick = function() {blindStateChange()};
+        }
+    }
+
+    function getWindowState() {
+      //implement gcp request to find out if open/closed & auto/manual
+      blindsMode = "manual";
+      blindState=document.createElement('p');
+      blindState.innerHTML = 'close';
+      let blindImage = document.createElement('p');
+      blindImage.innerHTML='Blinds are Open';
+      blindImage.id = 'blindsCurrent';
+      document.getElementById('windowState').appendChild(blindImage);
+      let modeSwitch = document.createElement("button");
+      modeSwitch.id = "modeSwitch";
+      modeSwitch.onclick = function() {changeMode()}
+      document.getElementById('windowState').appendChild(modeSwitch);
+      if (blindsMode=="manual") {
+        let items = document.getElementById('options');
+        modeSwitch.innerHTML = "switch to magic mode";
+        let blindsAdjust = document.createElement("button");
+        blindsAdjust.id = "blindsAdjust";
+        blindsAdjust.innerHTML = blindState.innerHTML;
+        items.appendChild(blindsAdjust);
+        blindsAdjust.onclick = function() {blindStateChange()};
+      }
+    }
+    let blindState;
+    let blindsMode;
+
+
+    window.onload = function(){
+      getWindowState();
+    }
+  /*front.on('windowStateMsg', function(msg) {
+      alert(msg);
+      if (msg=="closed") {
+        document.getElementById('windowState').innerHTML=msg;
+      }
+    })*/
+    console.log(app);
+    app.toast.show("nice it is working fine")
+</script>
+</html>
