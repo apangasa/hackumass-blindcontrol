@@ -40,7 +40,7 @@ def openClose():
     if not new_state:
         return 'No state specified', 400
 
-    with open(WORKDIR + '/instructions.data', 'a') as instructions:
+    with open(WORKDIR + '/instructions.data', 'w') as instructions:
         instructions.write('0' if new_state == 'closed' else '1')
 
     return jsonify(success=True), 200
