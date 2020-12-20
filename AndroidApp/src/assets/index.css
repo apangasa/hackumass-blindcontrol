@@ -1,3 +1,4 @@
+/* center body and set base font-size */
 body {
   width: 100%;
   border: none;
@@ -6,6 +7,7 @@ body {
   font-size: 20px;
   margin: 0;
 }
+/* Design blind state */
 p {
   font-size: 25px;
   margin-top: 0;
@@ -14,11 +16,13 @@ p {
   letter-spacing: .1em;
   font-family: 'Roboto';
 }
+/* apply base button design */
 button {
   height: 100px;
   width: 80%;
   outline:none;
 }
+/* Design App Title Bar */
 .title {
   padding-top: 50px;
   padding-bottom: 10px;
@@ -31,17 +35,18 @@ button {
   font-weight: bold;
   font-family: 'Roboto';
 }
+/* background color for blind state */
 #windowState {
   background-image: linear-gradient(to bottom, #add8e6 75%, #ffffff 75%);
 }
+/* button design of blind state */
 #windowState button {
   font-size: 25px;
   font-family: 'Roboto';
   background-color: white;
   border-radius: 20px;
-
-
 }
+/* button design of blind adjustment UI */
 #options button {
   width: 100%;
   font-size: 25px;
@@ -51,9 +56,8 @@ button {
   background-color: #add8e6;
   color:white;
   border: none;
-
-
 }
+/* set blinds adjustment UI to bottom of screen */
 #options {
   width: 100%;
   position: absolute;
