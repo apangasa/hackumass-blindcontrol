@@ -6,7 +6,7 @@ import requests
 app = Flask(__name__)
 CORS(app)
 
-WORKDIR = 'C:\Users\ramse\Documents\hackumass-blindcontrol\local'  # The directory of the local filesystem where workfiles should be read from and written to
+WORKDIR = '.'  # The directory of the local filesystem where workfiles should be read from and written to
 
 
 # A way to quickly check if the endpoint has deployed properly
@@ -25,7 +25,7 @@ def writeMode():
         return 'No mode specified', 400
 
     with open(WORKDIR + '/mode.data', 'w') as mode_file:
-        mode_file.write(mode)
+        mode_file.write('0' if mode == 'manual' else '1')
 
     return jsonify(success=True), 200
 
@@ -41,7 +41,7 @@ def openClose():
         return 'No state specified', 400
 
     with open(WORKDIR + '/instructions.data', 'a') as instructions:
-        instructions.write(new_state)
+        instructions.write('0' if new_state == 'closed' else '1')
 
     return jsonify(success=True), 200
 
