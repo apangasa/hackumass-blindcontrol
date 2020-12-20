@@ -15,11 +15,12 @@ function blindStateChange() {
     //perform gcp request to close blinds and then change state of app
     fetch("https://blind-control-299118.ue.r.appspot.com/flip", requestOptions)
       .then(response => response.text())
-      .then(result =>
+      .then(result =>{
         //change blind state if successful
-        blindState.innerHTML='close',
-        document.getElementById('blindsAdjust').innerHTML = blindState.innerHTML,
-        document.getElementById('blindsCurrent').innerHTML = 'Blinds are Closed'
+        blindState.innerHTML='close';
+        document.getElementById('blindsAdjust').innerHTML = 'open';
+        document.getElementById('blindsCurrent').innerHTML = 'Blinds are Closed';
+      }
       )
       .catch(error => console.log('error', error));
 
@@ -39,11 +40,12 @@ function blindStateChange() {
     //perform request to gcp and change state of blinds
     fetch("https://blind-control-299118.ue.r.appspot.com/flip", requestOptions)
       .then(response => response.text())
-      .then(result =>
+      .then(result => {
         //change blind state if successful
-        blindState.innerHTML="open",
-        document.getElementById('blindsAdjust').innerHTML = blindState.innerHTML,
-        document.getElementById('blindsCurrent').innerHTML = 'Blinds are Open'
+        blindState.innerHTML="open";
+        document.getElementById('blindsAdjust').innerHTML = "close";
+        document.getElementById('blindsCurrent').innerHTML = 'Blinds are Open';
+      }
       )
       .catch(error => console.log('error', error));
   }
@@ -70,11 +72,11 @@ function changeMode() {
       //perform gcp request to change mode to automatic
       fetch("https://blind-control-299118.ue.r.appspot.com/change-mode\n", requestOptions)
         .then(response => response.text())
-        .then(result =>
+        .then(result => {
           //change blinds mode if successful
-          blindsMode="automatic",
-          windowState.innerHTML = '',
-          modeSwitch.innerHTML = "switch to manual"
+          blindsMode="automatic";
+          windowState.innerHTML = '';
+          modeSwitch.innerHTML = "switch to manual";}
         )
         .catch(error => console.log('error', error));
     }
@@ -95,15 +97,20 @@ function changeMode() {
       //perform gcp request to change mode to manual
       fetch("https://blind-control-299118.ue.r.appspot.com/change-mode\n", requestOptions)
         .then(response => response.text())
-        .then(result =>
+        .then(result => {
           //change blind mode if successful
-          modeSwitch.innerHTML = "switch to magic mode",
-          blindsMode = "manual",
+          modeSwitch.innerHTML = "switch to magic mode";
+          blindsMode = "manual";
           //render manual mode UI
-          blindsAdjust.id = "blindsAdjust",
-          blindsAdjust.innerHTML = blindState.innerHTML,
-          items.appendChild(blindsAdjust),
-          blindsAdjust.onclick = function() {blindStateChange()}
+          blindsAdjust.id = "blindsAdjust";
+          if (blindState.innerHTML==="open") {
+            blindsAdjust.innerHTML = "close";
+          }
+          else if (blindState.innerHTML==="close") {
+            blindsAdjust.innerHTML = "open";
+          }
+          items.appendChild(blindsAdjust);
+          blindsAdjust.onclick = function() {blindStateChange()};}
         )
         .catch(error => console.log('error', error));
     }
@@ -123,20 +130,20 @@ async function getWindowState() {
     redirect: 'follow'
   };
   //setup ui based on gcp
-  let stateRequest;
   let blindImage = document.createElement('p');
   //get blind status using gcp
   await fetch("https://blind-control-299118.ue.r.appspot.com/get-state", requestOptions)
     .then(response => response.json())
-    .then(result => stateRequest=result.state)
+    .then(result => {
   //if blinds are open, set ui to open blinds
   //if blinds are closed, set ui to closed blinds
-  if (stateRequest=='open') {
-    blindState.innerHTML = 'close';
+
+  if (result.state=='open') {
+    blindState.innerHTML = 'open';
     blindImage.innerHTML='Blinds are Open';
   }
-  else if (stateRequest=='closed') {
-    blindState.innerHTML = 'open';
+  else if (result.state=='close') {
+    blindState.innerHTML = 'close';
     blindImage.innerHTML = 'Blinds are Closed';
   }
   blindImage.id = 'blindsCurrent';
@@ -160,7 +167,7 @@ async function getWindowState() {
     //render automatic mode
     modeSwitch.innerHTML = "switch to manual mode";
   }
-
+})
 }
 let blindState;
 let blindsMode;
