@@ -7,6 +7,11 @@ Flippy consists of extensive hardware and software that allows it to control you
 ### Hardware
 On the hardware end, Flippy makes use of an Arduino Uno to operate a stepper motor according to resistances measured from a photoresistor. We empirically determined a threshold resistance that indicates daylight, so the motor opens and closes the blinds based on the measured photoresistor value compared to this threshold. The motor is mounted via a custom-engineered 3D printed bracket and interfaced with the blind rotational point via 3D printed gears.
 
+![Bracket CAD 1](https://github.com/apangasa/hackumass-blindcontrol/blob/main/images/Bracket1.png)
+![Bracket CAD 2](https://github.com/apangasa/hackumass-blindcontrol/blob/main/images/Bracket2.png)
+![Gears](https://github.com/apangasa/hackumass-blindcontrol/blob/main/images/Gears.png)
+
+
 ### Software
 Flippy's software consists of the following:
 - Android mobile App frontend written in JavaScript to control the mode and operate the blind state in manual mode
